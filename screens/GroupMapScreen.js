@@ -9,31 +9,33 @@ export default function GroupMapScreen() {
     const screenHeight = Dimensions.get('window').height;
 
     const calculateCompatibility = (member1, member2) => {
-        const traits = ['extroversion', 'openness', 'conscientiousness', 'agreeableness', 'neuroticism'];
-        let score = 0;
+        let score = 5; // Base compatibility score
 
-        // Calculate base compatibility from traits
-        traits.forEach(trait => {
-            const diff = Math.abs(member1.traits[trait] - member2.traits[trait]);
-            if (trait === 'extroversion') {
-                // Similar extroversion levels are good
-                score += (100 - diff) * 0.02;
-            } else if (trait === 'openness') {
-                // Higher openness is generally better for group dynamics
-                score += ((member1.traits[trait] + member2.traits[trait]) / 2) * 0.015;
-            } else if (trait === 'conscientiousness') {
-                // Balance of conscientiousness is good
-                score += (100 - diff) * 0.015;
-            } else if (trait === 'agreeableness') {
-                // Higher agreeableness is better for compatibility
-                score += ((member1.traits[trait] + member2.traits[trait]) / 2) * 0.02;
-            } else if (trait === 'neuroticism') {
-                // Lower neuroticism is better for group stability
-                score += (200 - (member1.traits[trait] + member2.traits[trait])) * 0.01;
+        // Calculate shared traits bonus
+        const sharedTraits = member1.selectedTraits.filter(trait =>
+            member2.selectedTraits.includes(trait)
+        );
+        score += sharedTraits.length * 0.5;
+
+        // Calculate rating compatibility
+        const ratingKeys = [
+            "Funny Level",
+            "Chill Level",
+            "Sus Level",
+            "Rizz Level",
+            "Main Character Energy",
+            "Emotional Intelligence"
+        ];
+
+        ratingKeys.forEach(key => {
+            if (member1.ratings[key] && member2.ratings[key]) {
+                const diff = Math.abs(member1.ratings[key] - member2.ratings[key]);
+                // Add compatibility bonus for similar ratings
+                score += (100 - diff) * 0.01;
             }
         });
 
-        // Interest compatibility bonus
+        // Interest compatibility
         if (member1.interests && member2.interests) {
             const interests1 = member1.interests.toLowerCase().split(',').map(i => i.trim());
             const interests2 = member2.interests.toLowerCase().split(',').map(i => i.trim());
@@ -41,7 +43,7 @@ export default function GroupMapScreen() {
             score += commonInterests.length * 0.5;
         }
 
-        // Convert to 1-10 scale and cap
+        // Cap final score between 1-10
         return Math.min(Math.max(Math.round(score), 1), 10);
     };
 

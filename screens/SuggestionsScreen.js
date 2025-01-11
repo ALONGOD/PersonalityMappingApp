@@ -1,132 +1,317 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, StyleSheet, ActivityIndicator, Button } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { useGroup } from '../store/GroupContext';
 
 const ACTIVITIES = [
     {
         name: "Escape Room Adventure",
-        traits: { openness: 0.7, extroversion: 0.6, conscientiousness: 0.8 },
+        traits: {
+            ratings: {
+                "Funny Level": 60,
+                "Chill Level": 50,
+                "Sus Level": 40,
+                "Rizz Level": 50,
+                "Main Character Energy": 60,
+                "Emotional Intelligence": 70,
+            },
+            preferredTraits: ["Problem-Solver", "Leader", "Adventurous"]
+        },
         tags: ["problem-solving", "teamwork", "communication"]
     },
     {
+        name: "Game Night",
+        traits: {
+            ratings: {
+                "Funny Level": 80,
+                "Chill Level": 70,
+                "Sus Level": 50,
+                "Rizz Level": 40,
+                "Main Character Energy": 50,
+                "Emotional Intelligence": 60,
+            },
+            preferredTraits: ["Funny", "Competitive", "Social"]
+        },
+        tags: ["games", "social", "fun"]
+    },
+    {
         name: "Group Hiking Trip",
-        traits: { openness: 0.8, extroversion: 0.5, neuroticism: -0.4 },
+        traits: {
+            ratings: {
+                "Funny Level": 50,
+                "Chill Level": 80,
+                "Sus Level": 20,
+                "Rizz Level": 40,
+                "Main Character Energy": 70,
+                "Emotional Intelligence": 60,
+            },
+            preferredTraits: ["Adventurous", "Nature-Lover", "Fitness-Oriented"]
+        },
         tags: ["outdoor", "nature", "fitness"]
     },
     {
         name: "Board Game Night",
-        traits: { conscientiousness: 0.6, agreeableness: 0.7, extroversion: 0.5 },
+        traits: {
+            ratings: {
+                "Funny Level": 70,
+                "Chill Level": 60,
+                "Sus Level": 30,
+                "Rizz Level": 30,
+                "Main Character Energy": 50,
+                "Emotional Intelligence": 60,
+            },
+            preferredTraits: ["Strategic", "Social", "Patient"]
+        },
         tags: ["games", "strategy", "indoor"]
     },
     {
         name: "Cooking Class",
-        traits: { openness: 0.6, conscientiousness: 0.7, agreeableness: 0.8 },
+        traits: {
+            ratings: {
+                "Funny Level": 50,
+                "Chill Level": 70,
+                "Sus Level": 10,
+                "Rizz Level": 30,
+                "Main Character Energy": 40,
+                "Emotional Intelligence": 80,
+            },
+            preferredTraits: ["Creative", "Team-Oriented", "Patient"]
+        },
         tags: ["cooking", "learning", "teamwork"]
     },
     {
         name: "Improv Workshop",
-        traits: { extroversion: 0.9, openness: 0.8, neuroticism: -0.6 },
+        traits: {
+            ratings: {
+                "Funny Level": 90,
+                "Chill Level": 40,
+                "Sus Level": 60,
+                "Rizz Level": 80,
+                "Main Character Energy": 90,
+                "Emotional Intelligence": 70,
+            },
+            preferredTraits: ["Confident", "Creative", "Social"]
+        },
         tags: ["performance", "creativity", "communication"]
     },
     {
         name: "Volunteer Project",
-        traits: { agreeableness: 0.9, conscientiousness: 0.7, extroversion: 0.5 },
+        traits: {
+            ratings: {
+                "Funny Level": 40,
+                "Chill Level": 50,
+                "Sus Level": 10,
+                "Rizz Level": 20,
+                "Main Character Energy": 60,
+                "Emotional Intelligence": 90,
+            },
+            preferredTraits: ["Compassionate", "Team-Oriented", "Helpful"]
+        },
         tags: ["community", "teamwork", "social"]
     },
     {
         name: "DIY Crafting Session",
-        traits: { openness: 0.7, conscientiousness: 0.8, neuroticism: -0.3 },
+        traits: {
+            ratings: {
+                "Funny Level": 50,
+                "Chill Level": 70,
+                "Sus Level": 20,
+                "Rizz Level": 30,
+                "Main Character Energy": 40,
+                "Emotional Intelligence": 70,
+            },
+            preferredTraits: ["Creative", "Artistic", "Focused"]
+        },
         tags: ["creative", "artistic", "hands-on"]
     },
     {
         name: "Team Sports Game",
-        traits: { extroversion: 0.8, agreeableness: 0.7, neuroticism: -0.5 },
+        traits: {
+            ratings: {
+                "Funny Level": 70,
+                "Chill Level": 50,
+                "Sus Level": 30,
+                "Rizz Level": 60,
+                "Main Character Energy": 70,
+                "Emotional Intelligence": 60,
+            },
+            preferredTraits: ["Competitive", "Team-Oriented", "Active"]
+        },
         tags: ["sports", "competition", "teamwork"]
     },
     {
         name: "Poker Night",
-        traits: { extroversion: 0.6, conscientiousness: 0.7, neuroticism: -0.4 },
+        traits: {
+            ratings: {
+                "Funny Level": 60,
+                "Chill Level": 70,
+                "Sus Level": 60,
+                "Rizz Level": 50,
+                "Main Character Energy": 40,
+                "Emotional Intelligence": 60,
+            },
+            preferredTraits: ["Strategic", "Social", "Competitive"]
+        },
         tags: ["games", "social", "competitive"]
     },
     {
-        name: "Soccer Match",
-        traits: { extroversion: 0.8, agreeableness: 0.7, neuroticism: -0.5 },
-        tags: ["sports", "outdoor", "teamwork"]
-    },
-    {
-        name: "Basketball Game",
-        traits: { extroversion: 0.8, agreeableness: 0.6, neuroticism: -0.4 },
-        tags: ["sports", "fitness", "teamwork"]
-    },
-    {
-        name: "Baseball Game",
-        traits: { conscientiousness: 0.7, agreeableness: 0.6, neuroticism: -0.3 },
-        tags: ["sports", "outdoor", "teamwork"]
-    },
-    {
         name: "Bar Hopping",
-        traits: { extroversion: 0.9, openness: 0.7, neuroticism: -0.6 },
+        traits: {
+            ratings: {
+                "Funny Level": 90,
+                "Chill Level": 50,
+                "Sus Level": 70,
+                "Rizz Level": 80,
+                "Main Character Energy": 70,
+                "Emotional Intelligence": 50,
+            },
+            preferredTraits: ["Extroverted", "Adventurous", "Social"]
+        },
         tags: ["nightlife", "social", "drinking"]
     },
     {
         name: "Karaoke Night",
-        traits: { extroversion: 0.8, openness: 0.7, neuroticism: -0.5 },
+        traits: {
+            ratings: {
+                "Funny Level": 80,
+                "Chill Level": 50,
+                "Sus Level": 40,
+                "Rizz Level": 70,
+                "Main Character Energy": 80,
+                "Emotional Intelligence": 60,
+            },
+            preferredTraits: ["Confident", "Performative", "Social"]
+        },
         tags: ["music", "performance", "nightlife"]
     },
     {
         name: "Get Matching Tattoos",
-        traits: { openness: 0.9, neuroticism: -0.7, conscientiousness: -0.5 },
+        traits: {
+            ratings: {
+                "Funny Level": 60,
+                "Chill Level": 40,
+                "Sus Level": 90,
+                "Rizz Level": 80,
+                "Main Character Energy": 70,
+                "Emotional Intelligence": 50,
+            },
+            preferredTraits: ["Adventurous", "Daring", "Rebellious"]
+        },
         tags: ["adventure", "permanent", "rebellious"]
     },
     {
-        name: "Video Game Tournament",
-        traits: { competitiveness: 0.7, extroversion: 0.5, neuroticism: -0.3 },
-        tags: ["gaming", "competition", "indoor"]
+        name: "D&D Night",
+        traits: {
+            ratings: {
+                "Funny Level": 70,
+                "Chill Level": 60,
+                "Sus Level": 40,
+                "Rizz Level": 30,
+                "Main Character Energy": 80,
+                "Emotional Intelligence": 70,
+            },
+            preferredTraits: ["Creative", "Strategic", "Storyteller"]
+        },
+        tags: ["games", "imagination", "teamwork"]
     },
     {
-        name: "Beach Volleyball",
-        traits: { extroversion: 0.7, agreeableness: 0.6, neuroticism: -0.4 },
-        tags: ["sports", "outdoor", "beach"]
+        name: "Zoo Adventure",
+        traits: {
+            ratings: {
+                "Funny Level": 60,
+                "Chill Level": 70,
+                "Sus Level": 30,
+                "Rizz Level": 30,
+                "Main Character Energy": 50,
+                "Emotional Intelligence": 60,
+            },
+            preferredTraits: ["Nature-Lover", "Adventurous", "Curious"]
+        },
+        tags: ["outdoor", "animals", "adventure"]
     },
     {
-        name: "Music Festival",
-        traits: { openness: 0.8, extroversion: 0.8, neuroticism: -0.5 },
-        tags: ["music", "outdoor", "social"]
+        name: "Smoke Zaza",
+        traits: {
+            ratings: {
+                "Funny Level": 70,
+                "Chill Level": 90,
+                "Sus Level": 50,
+                "Rizz Level": 40,
+                "Main Character Energy": 40,
+                "Emotional Intelligence": 50,
+            },
+            preferredTraits: ["Relaxed", "Chill", "Open-Minded"]
+        },
+        tags: ["relaxation", "social", "fun"]
     },
     {
-        name: "Paint & Sip Night",
-        traits: { openness: 0.7, extroversion: 0.5, neuroticism: -0.3 },
-        tags: ["art", "drinking", "social"]
+        name: "Orgy Night",
+        traits: {
+            ratings: {
+                "Funny Level": 50,
+                "Chill Level": 30,
+                "Sus Level": 100,
+                "Rizz Level": 90,
+                "Main Character Energy": 80,
+                "Emotional Intelligence": 40,
+            },
+            preferredTraits: ["Sus", "Adventurous", "Open-Minded", "Confident"]
+        },
+        tags: ["intimacy", "social", "adventure"]
     }
-    // Add more activities as needed
 ];
+
 
 export default function SuggestionsScreen() {
     const { groupMembers } = useGroup();
     const [suggestions, setSuggestions] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [currentIndex, setCurrentIndex] = useState(0);
-    const [sortedActivities, setSortedActivities] = useState([]);
+
+    useEffect(() => {
+        if (groupMembers && groupMembers.length > 0) {
+            generateSuggestions();
+        }
+    }, [groupMembers]);
 
     const calculateGroupStats = () => {
         const stats = {
-            avgTraits: {
-                extroversion: 0,
-                openness: 0,
-                conscientiousness: 0,
-                agreeableness: 0,
-                neuroticism: 0
+            avgRatings: {
+                "Funny Level": 0,
+                "Chill Level": 0,
+                "Sus Level": 0,
+                "Rizz Level": 0,
+                "Main Character Energy": 0,
+                "Emotional Intelligence": 0
             },
+            commonTraits: [],
             interests: new Set()
         };
 
-        groupMembers.forEach(member => {
-            // Calculate average traits
-            Object.keys(member.traits).forEach(trait => {
-                stats.avgTraits[trait] += member.traits[trait] / groupMembers.length;
-            });
+        if (!groupMembers || groupMembers.length === 0) return stats;
 
-            // Collect all interests
+        // Calculate average ratings
+        groupMembers.forEach(member => {
+            if (member.ratings) {
+                Object.keys(stats.avgRatings).forEach(rating => {
+                    const ratingValue = member.ratings[rating] || 0;
+                    stats.avgRatings[rating] += ratingValue / groupMembers.length;
+                });
+            }
+
+            // Collect traits
+            if (member.selectedTraits && Array.isArray(member.selectedTraits)) {
+                member.selectedTraits.forEach(trait => {
+                    if (groupMembers.filter(m =>
+                        m.selectedTraits &&
+                        Array.isArray(m.selectedTraits) &&
+                        m.selectedTraits.includes(trait)
+                    ).length > 1) {
+                        if (!stats.commonTraits.includes(trait)) {
+                            stats.commonTraits.push(trait);
+                        }
+                    }
+                });
+            }
+
+            // Collect interests
             if (member.interests) {
                 member.interests.toLowerCase().split(',')
                     .map(i => i.trim())
@@ -141,112 +326,71 @@ export default function SuggestionsScreen() {
         let compatibilityScore = 0;
         let reasons = [];
 
-        // Trait compatibility (70% of total score)
-        let traitScoreTotal = 0;
-        let traitCount = 0;
-        Object.entries(activity.traits).forEach(([trait, value]) => {
-            const normalizedGroupTrait = groupStats.avgTraits[trait] / 100;
-            const traitCompatibility = 1 - Math.abs(value - normalizedGroupTrait);
-            traitScoreTotal += traitCompatibility;
-            traitCount++;
+        // Rating compatibility (50% of total score)
+        let ratingScore = 0;
+        const ratingKeys = Object.keys(activity.traits.ratings);
+
+        ratingKeys.forEach(key => {
+            const groupAvg = groupStats.avgRatings[key] || 50;
+            const activityRating = activity.traits.ratings[key];
+            const ratingDiff = Math.abs(groupAvg - activityRating);
+            ratingScore += (100 - ratingDiff) / 100;
         });
 
-        // Average trait score (normalized to 70%)
-        compatibilityScore += (traitScoreTotal / traitCount) * 0.7;
+        compatibilityScore += (ratingScore / ratingKeys.length) * 0.5;
 
-        // Interest matching (30% of total score)
+        // Trait matching (30% of total score)
+        const matchingTraits = activity.traits.preferredTraits.filter(trait =>
+            groupStats.commonTraits.includes(trait)
+        );
+        const traitScore = (matchingTraits.length / activity.traits.preferredTraits.length) * 0.3;
+        compatibilityScore += traitScore;
+
+        // Interest matching (20% of total score)
         const matchingInterests = activity.tags.filter(tag =>
             Array.from(groupStats.interests).some(interest =>
                 interest.includes(tag) || tag.includes(interest)
             )
-        ).length;
-
-        // Normalize interest score (max 30%)
-        const interestScore = Math.min((matchingInterests / activity.tags.length), 1) * 0.3;
+        );
+        const interestScore = (matchingInterests.length / activity.tags.length) * 0.2;
         compatibilityScore += interestScore;
 
-        // Cap final score at 100%
-        compatibilityScore = Math.min(compatibilityScore, 1);
-
-        // Generate compatibility reasons
-        if (interestScore > 0) {
-            reasons.push("Matches group interests");
+        // Generate reasons
+        if (matchingTraits.length > 0) {
+            reasons.push(`Matches group traits: ${matchingTraits.join(', ')}`);
         }
-
-        const strongestTrait = Object.entries(activity.traits)
-            .reduce((a, b) => Math.abs(b[1] - groupStats.avgTraits[b[0]] / 100) <
-                Math.abs(a[1] - groupStats.avgTraits[a[0]] / 100) ? b : a);
-
-        reasons.push(`Strong ${strongestTrait[0]} compatibility`);
+        if (matchingInterests.length > 0) {
+            reasons.push(`Aligns with group interests`);
+        }
 
         return {
             id: Math.random().toString(36).substr(2, 9),
             activity: activity.name,
-            compatibility: compatibilityScore,
-            reason: reasons.join(". ")
+            compatibility: Math.round(compatibilityScore * 100),
+            reason: reasons.join('. ')
         };
     };
 
     const generateSuggestions = () => {
-        setLoading(true);
         const groupStats = calculateGroupStats();
-
-        if (currentIndex === 0 || sortedActivities.length === 0) {
-            // Initial sort or reset
-            const allSuggestions = ACTIVITIES.map(activity =>
-                calculateActivityCompatibility(activity, groupStats)
-            ).sort((a, b) => b.compatibility - a.compatibility);
-
-            setSortedActivities(allSuggestions);
-            setSuggestions(allSuggestions.slice(0, 5));
-            setCurrentIndex(5);
-        } else {
-            // Get next 5 suggestions
-            const nextIndex = currentIndex + 5;
-            const nextSuggestions = sortedActivities.slice(currentIndex, nextIndex);
-
-            // Reset if we reach the end
-            if (nextSuggestions.length < 5) {
-                setSuggestions(sortedActivities.slice(0, 5));
-                setCurrentIndex(5);
-            } else {
-                setSuggestions(nextSuggestions);
-                setCurrentIndex(nextIndex);
-            }
-        }
-
-        setLoading(false);
+        const activitySuggestions = ACTIVITIES.map(activity =>
+            calculateActivityCompatibility(activity, groupStats)
+        ).sort((a, b) => b.compatibility - a.compatibility);
+        setSuggestions(activitySuggestions);
     };
 
-    useEffect(() => {
-        generateSuggestions();
-    }, [groupMembers]);
-
-    if (loading) {
-        return <ActivityIndicator style={styles.loader} size="large" />;
-    }
-
     return (
-        <View style={styles.container}>
-            <Button
-                title="Shuffle Suggestions"
-                onPress={generateSuggestions}
-                style={styles.shuffleButton}
-            />
-            <FlatList
-                data={suggestions}
-                keyExtractor={(item) => item.id}
-                renderItem={({ item }) => (
-                    <View style={styles.suggestionCard}>
-                        <Text style={styles.activityTitle}>{item.activity}</Text>
-                        <Text style={styles.compatibility}>
-                            Compatibility: {Math.round(item.compatibility * 100)}%
-                        </Text>
-                        <Text style={styles.reason}>{item.reason}</Text>
-                    </View>
-                )}
-            />
-        </View>
+        <ScrollView style={styles.container}>
+            {suggestions.map(suggestion => (
+                <View key={suggestion.id} style={styles.card}>
+                    <Text style={styles.activityName}>{suggestion.activity}</Text>
+                    <Text style={styles.compatibility}>
+                        Compatibility: {suggestion.compatibility}%
+                    </Text>
+                    <Text style={styles.reason}>{suggestion.reason}</Text>
+                </View>
+            ))}
+        </ScrollView>
     );
 }
 
@@ -254,24 +398,20 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 16,
-        backgroundColor: '#fff',
-    },
-    loader: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    shuffleButton: {
-        marginBottom: 16,
-    },
-    suggestionCard: {
-        padding: 16,
-        marginVertical: 8,
         backgroundColor: '#f5f5f5',
-        borderRadius: 8,
-        elevation: 2,
     },
-    activityTitle: {
+    card: {
+        backgroundColor: 'white',
+        padding: 16,
+        borderRadius: 8,
+        marginBottom: 16,
+        elevation: 2,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+    },
+    activityName: {
         fontSize: 18,
         fontWeight: 'bold',
         marginBottom: 8,
@@ -283,6 +423,6 @@ const styles = StyleSheet.create({
     },
     reason: {
         fontSize: 14,
-        color: '#444',
-    }
+        color: '#888',
+    },
 });
