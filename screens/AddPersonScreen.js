@@ -3,6 +3,52 @@ import React, { useState } from 'react';
 import { View, TextInput, Button, StyleSheet, ScrollView, Text } from 'react-native';
 import Slider from '@react-native-community/slider';
 import { useGroup } from '../store/GroupContext';
+const analyzePersonality = (traits, name, interests) => {
+    const traitAnalysis = {
+        extroversion: {
+            low: 'tends to be reserved and values solitary time',
+            medium: 'balances social interactions with alone time',
+            high: 'is highly outgoing and energized by social interactions'
+        },
+        openness: {
+            low: 'prefers routine and familiar experiences',
+            medium: 'maintains a good balance between tradition and new experiences',
+            high: 'is curious and eager to explore new ideas'
+        },
+        conscientiousness: {
+            low: 'tends to be flexible and spontaneous',
+            medium: 'maintains a reasonable balance between work and relaxation',
+            high: 'is highly organized and detail-oriented'
+        },
+        agreeableness: {
+            low: 'tends to be direct and straightforward in interactions',
+            medium: 'balances cooperation with self-interest',
+            high: 'is very cooperative and considerate of others'
+        },
+        neuroticism: {
+            low: 'tends to be emotionally stable and resilient',
+            medium: 'shows normal emotional responses to stress',
+            high: 'may experience heightened emotional responses'
+        }
+    };
+
+    const getTraitLevel = (value) => {
+        if (value < 40) return 'low';
+        if (value > 60) return 'high';
+        return 'medium';
+    };
+
+    const traitDescriptions = Object.entries(traits).map(([trait, value]) => {
+        const level = getTraitLevel(value);
+        return `${name} ${traitAnalysis[trait][level]}`;
+    });
+
+    const interestAnalysis = interests ?
+        `Their interests in ${interests} suggest a person who engages in ${traits.openness > 60 ? 'diverse' : 'focused'
+        } activities.` : '';
+
+    return `${traitDescriptions.join('. ')}. ${interestAnalysis}`;
+};
 
 export default function AddPersonScreen({ navigation }) {
     const { addMember } = useGroup();
@@ -19,8 +65,11 @@ export default function AddPersonScreen({ navigation }) {
     });
 
     const handleSubmit = () => {
-        //add ai etc here
-        addMember(personData);
+        const analysis = analyzePersonality(personData.traits, personData.name, personData.interests);
+        addMember({
+            ...personData,
+            analysis
+        });
         navigation.goBack();
     };
 

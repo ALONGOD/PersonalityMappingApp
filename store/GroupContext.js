@@ -7,21 +7,28 @@ export function GroupProvider({ children }) {
     const [groupMembers, setGroupMembers] = useState([]);
 
     const addMember = (memberData) => {
-        // Generate a unique ID for the new member
         const newMember = {
             id: Math.random().toString(36).substr(2, 9),
             ...memberData,
-            // Generate a color based on personality traits
             color: generatePersonalityColor(memberData.traits),
         };
         setGroupMembers((prevMembers) => [...prevMembers, newMember]);
     };
 
-    // Helper function to generate a color based on personality traits
+    const deleteMember = (memberId) => {
+        setGroupMembers((prevMembers) =>
+            prevMembers.filter(member => member.id !== memberId)
+        );
+    };
+
+    const getMember = (memberId) => {
+        return groupMembers.find(member => member.id === memberId);
+    };
+
     const generatePersonalityColor = (traits) => {
         const { extroversion, openness, conscientiousness, agreeableness, neuroticism } = traits;
 
-        // Simple color generation based on dominant traits
+        // Color generation based on personality traits
         const r = Math.round((extroversion + neuroticism) * 1.27);
         const g = Math.round((agreeableness + conscientiousness) * 1.27);
         const b = Math.round((openness + (100 - neuroticism)) * 1.27);
@@ -30,7 +37,12 @@ export function GroupProvider({ children }) {
     };
 
     return (
-        <GroupContext.Provider value={{ groupMembers, addMember }}>
+        <GroupContext.Provider value={{
+            groupMembers,
+            addMember,
+            deleteMember,
+            getMember
+        }}>
             {children}
         </GroupContext.Provider>
     );

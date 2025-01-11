@@ -6,6 +6,7 @@ import { StyleSheet } from 'react-native';
 import HomeScreen from './screens/HomeScreen';
 import AddPersonScreen from './screens/AddPersonScreen';
 import GroupMapScreen from './screens/GroupMapScreen';
+import MemberDetailScreen from './screens/MemberDetailScreen';
 import SuggestionsScreen from './screens/SuggestionsScreen';
 import { GroupProvider } from './store/GroupContext';
 
@@ -35,6 +36,11 @@ export default function App() {
             name="Suggestions"
             component={SuggestionsScreen}
             options={{ title: 'Group Suggestions' }}
+          />
+          <Stack.Screen
+            name="MemberDetail"
+            component={MemberDetailScreen}
+            options={{ title: 'Member Details' }}
           />
         </Stack.Navigator>
       </NavigationContainer>
