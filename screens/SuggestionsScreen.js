@@ -4,7 +4,7 @@ import { useGroup } from '../store/GroupContext';
 
 const ACTIVITIES = [
     {
-        name: "Escape Room Adventure",
+        name: "Escape Room Adventure 🕵️‍♂️",
         traits: {
             ratings: {
                 "Funny Level": 60,
@@ -19,7 +19,7 @@ const ACTIVITIES = [
         tags: ["problem-solving", "teamwork", "communication"]
     },
     {
-        name: "Game Night",
+        name: "Game Night 🎲",
         traits: {
             ratings: {
                 "Funny Level": 80,
@@ -34,7 +34,7 @@ const ACTIVITIES = [
         tags: ["games", "social", "fun"]
     },
     {
-        name: "Group Hiking Trip",
+        name: "Group Hiking Trip 🥾",
         traits: {
             ratings: {
                 "Funny Level": 50,
@@ -49,7 +49,7 @@ const ACTIVITIES = [
         tags: ["outdoor", "nature", "fitness"]
     },
     {
-        name: "Board Game Night",
+        name: "Board Game Night ♟️",
         traits: {
             ratings: {
                 "Funny Level": 70,
@@ -64,7 +64,7 @@ const ACTIVITIES = [
         tags: ["games", "strategy", "indoor"]
     },
     {
-        name: "Cooking Class",
+        name: "Cooking Class 👨‍🍳",
         traits: {
             ratings: {
                 "Funny Level": 50,
@@ -79,7 +79,7 @@ const ACTIVITIES = [
         tags: ["cooking", "learning", "teamwork"]
     },
     {
-        name: "Improv Workshop",
+        name: "Improv Workshop 🎤",
         traits: {
             ratings: {
                 "Funny Level": 90,
@@ -94,7 +94,7 @@ const ACTIVITIES = [
         tags: ["performance", "creativity", "communication"]
     },
     {
-        name: "Volunteer Project",
+        name: "Volunteer Project 🛠️",
         traits: {
             ratings: {
                 "Funny Level": 40,
@@ -109,7 +109,7 @@ const ACTIVITIES = [
         tags: ["community", "teamwork", "social"]
     },
     {
-        name: "DIY Crafting Session",
+        name: "DIY Crafting Session ✂️",
         traits: {
             ratings: {
                 "Funny Level": 50,
@@ -124,7 +124,7 @@ const ACTIVITIES = [
         tags: ["creative", "artistic", "hands-on"]
     },
     {
-        name: "Team Sports Game",
+        name: "Team Sports Game ⚽",
         traits: {
             ratings: {
                 "Funny Level": 70,
@@ -139,7 +139,7 @@ const ACTIVITIES = [
         tags: ["sports", "competition", "teamwork"]
     },
     {
-        name: "Poker Night",
+        name: "Poker Night 🃏",
         traits: {
             ratings: {
                 "Funny Level": 60,
@@ -154,7 +154,7 @@ const ACTIVITIES = [
         tags: ["games", "social", "competitive"]
     },
     {
-        name: "Bar Hopping",
+        name: "Bar Hopping 🍻",
         traits: {
             ratings: {
                 "Funny Level": 90,
@@ -169,7 +169,7 @@ const ACTIVITIES = [
         tags: ["nightlife", "social", "drinking"]
     },
     {
-        name: "Karaoke Night",
+        name: "Karaoke Night 🎶",
         traits: {
             ratings: {
                 "Funny Level": 80,
@@ -184,7 +184,7 @@ const ACTIVITIES = [
         tags: ["music", "performance", "nightlife"]
     },
     {
-        name: "Get Matching Tattoos",
+        name: "Get Matching Tattoos 🖋️",
         traits: {
             ratings: {
                 "Funny Level": 60,
@@ -199,37 +199,7 @@ const ACTIVITIES = [
         tags: ["adventure", "permanent", "rebellious"]
     },
     {
-        name: "D&D Night",
-        traits: {
-            ratings: {
-                "Funny Level": 70,
-                "Chill Level": 60,
-                "Sus Level": 40,
-                "Rizz Level": 30,
-                "Main Character Energy": 80,
-                "Emotional Intelligence": 70,
-            },
-            preferredTraits: ["Creative", "Strategic", "Storyteller"]
-        },
-        tags: ["games", "imagination", "teamwork"]
-    },
-    {
-        name: "Zoo Adventure",
-        traits: {
-            ratings: {
-                "Funny Level": 60,
-                "Chill Level": 70,
-                "Sus Level": 30,
-                "Rizz Level": 30,
-                "Main Character Energy": 50,
-                "Emotional Intelligence": 60,
-            },
-            preferredTraits: ["Nature-Lover", "Adventurous", "Curious"]
-        },
-        tags: ["outdoor", "animals", "adventure"]
-    },
-    {
-        name: "Smoke Zaza",
+        name: "Smoke Zaza 🌬️",
         traits: {
             ratings: {
                 "Funny Level": 70,
@@ -244,7 +214,7 @@ const ACTIVITIES = [
         tags: ["relaxation", "social", "fun"]
     },
     {
-        name: "Orgy Night",
+        name: "Orgy Night 🍑",
         traits: {
             ratings: {
                 "Funny Level": 50,
@@ -257,8 +227,294 @@ const ACTIVITIES = [
             preferredTraits: ["Sus", "Adventurous", "Open-Minded", "Confident"]
         },
         tags: ["intimacy", "social", "adventure"]
+    },
+    {
+        name: "Mini Golf Tournament ⛳",
+        traits: {
+            ratings: {
+                "Funny Level": 70,
+                "Chill Level": 80,
+                "Sus Level": 20,
+                "Rizz Level": 40,
+                "Main Character Energy": 50,
+                "Emotional Intelligence": 60,
+            },
+            preferredTraits: ["Patient", "Strategic", "Competitive"]
+        },
+        tags: ["fun", "sports", "social"]
+    },
+    {
+        name: "Beach Day 🏖️",
+        traits: {
+            ratings: {
+                "Funny Level": 80,
+                "Chill Level": 90,
+                "Sus Level": 30,
+                "Rizz Level": 50,
+                "Main Character Energy": 60,
+                "Emotional Intelligence": 50,
+            },
+            preferredTraits: ["Relaxed", "Adventurous", "Nature-Lover"]
+        },
+        tags: ["outdoor", "nature", "relaxation"]
+    },
+    {
+        name: "Wine Tasting 🍷",
+        traits: {
+            ratings: {
+                "Funny Level": 60,
+                "Chill Level": 70,
+                "Sus Level": 30,
+                "Rizz Level": 60,
+                "Main Character Energy": 50,
+                "Emotional Intelligence": 70,
+            },
+            preferredTraits: ["Sophisticated", "Curious", "Social"]
+        },
+        tags: ["food", "drinks", "classy"]
+    },
+    {
+        name: "Hot Air Balloon Ride 🎈",
+        traits: {
+            ratings: {
+                "Funny Level": 40,
+                "Chill Level": 90,
+                "Sus Level": 10,
+                "Rizz Level": 70,
+                "Main Character Energy": 80,
+                "Emotional Intelligence": 60,
+            },
+            preferredTraits: ["Adventurous", "Romantic", "Curious"]
+        },
+        tags: ["adventure", "scenic", "memorable"]
+    },
+    {
+        name: "Trivia Night 📚",
+        traits: {
+            ratings: {
+                "Funny Level": 70,
+                "Chill Level": 50,
+                "Sus Level": 30,
+                "Rizz Level": 40,
+                "Main Character Energy": 50,
+                "Emotional Intelligence": 70,
+            },
+            preferredTraits: ["Smart", "Competitive", "Team-Oriented"]
+        },
+        tags: ["games", "intellectual", "social"]
+    },
+    {
+        name: "Paintball Battle 🔫",
+        traits: {
+            ratings: {
+                "Funny Level": 80,
+                "Chill Level": 40,
+                "Sus Level": 50,
+                "Rizz Level": 60,
+                "Main Character Energy": 90,
+                "Emotional Intelligence": 50,
+            },
+            preferredTraits: ["Competitive", "Strategic", "Active"]
+        },
+        tags: ["action", "strategy", "teamwork"]
+    },
+    {
+        name: "Camping Trip ⛺",
+        traits: {
+            ratings: {
+                "Funny Level": 60,
+                "Chill Level": 80,
+                "Sus Level": 20,
+                "Rizz Level": 40,
+                "Main Character Energy": 70,
+                "Emotional Intelligence": 70,
+            },
+            preferredTraits: ["Nature-Lover", "Adventurous", "Independent"]
+        },
+        tags: ["outdoor", "nature", "adventure"]
+    },
+    {
+        name: "Comedy Club Night 🎭",
+        traits: {
+            ratings: {
+                "Funny Level": 90,
+                "Chill Level": 60,
+                "Sus Level": 30,
+                "Rizz Level": 50,
+                "Main Character Energy": 60,
+                "Emotional Intelligence": 50,
+            },
+            preferredTraits: ["Funny", "Social", "Relaxed"]
+        },
+        tags: ["entertainment", "laughter", "social"]
+    },
+    {
+        name: "Horseback Riding 🐎",
+        traits: {
+            ratings: {
+                "Funny Level": 50,
+                "Chill Level": 70,
+                "Sus Level": 20,
+                "Rizz Level": 50,
+                "Main Character Energy": 80,
+                "Emotional Intelligence": 70,
+            },
+            preferredTraits: ["Nature-Lover", "Adventurous", "Calm"]
+        },
+        tags: ["outdoor", "animals", "scenic"]
+    },
+    {
+        name: "Pottery Class 🏺",
+        traits: {
+            ratings: {
+                "Funny Level": 60,
+                "Chill Level": 70,
+                "Sus Level": 10,
+                "Rizz Level": 40,
+                "Main Character Energy": 50,
+                "Emotional Intelligence": 80,
+            },
+            preferredTraits: ["Creative", "Patient", "Focused"]
+        },
+        tags: ["creative", "hands-on", "relaxing"]
+    },
+    {
+        name: "Haunted House Tour 👻",
+        traits: {
+            ratings: {
+                "Funny Level": 70,
+                "Chill Level": 30,
+                "Sus Level": 60,
+                "Rizz Level": 50,
+                "Main Character Energy": 70,
+                "Emotional Intelligence": 60,
+            },
+            preferredTraits: ["Adventurous", "Brave", "Energetic"]
+        },
+        tags: ["thrill", "fun", "adventure"]
+    },
+    {
+        name: "Sushi Rolling Class 🍣",
+        traits: {
+            ratings: {
+                "Funny Level": 50,
+                "Chill Level": 80,
+                "Sus Level": 10,
+                "Rizz Level": 40,
+                "Main Character Energy": 40,
+                "Emotional Intelligence": 80,
+            },
+            preferredTraits: ["Creative", "Patient", "Team-Oriented"]
+        },
+        tags: ["cooking", "learning", "teamwork"]
+    },
+    {
+        name: "Arcade Night 🕹️",
+        traits: {
+            ratings: {
+                "Funny Level": 80,
+                "Chill Level": 60,
+                "Sus Level": 30,
+                "Rizz Level": 50,
+                "Main Character Energy": 60,
+                "Emotional Intelligence": 50,
+            },
+            preferredTraits: ["Competitive", "Funny", "Energetic"]
+        },
+        tags: ["games", "fun", "social"]
+    },
+    {
+        name: "Laser Tag Battle 🔦",
+        traits: {
+            ratings: {
+                "Funny Level": 80,
+                "Chill Level": 50,
+                "Sus Level": 40,
+                "Rizz Level": 60,
+                "Main Character Energy": 80,
+                "Emotional Intelligence": 50,
+            },
+            preferredTraits: ["Competitive", "Strategic", "Team-Oriented"]
+        },
+        tags: ["action", "strategy", "teamwork"]
+    },
+    {
+        name: "Rock Climbing 🧗",
+        traits: {
+            ratings: {
+                "Funny Level": 50,
+                "Chill Level": 60,
+                "Sus Level": 30,
+                "Rizz Level": 60,
+                "Main Character Energy": 90,
+                "Emotional Intelligence": 70,
+            },
+            preferredTraits: ["Adventurous", "Fit", "Persistent"]
+        },
+        tags: ["fitness", "adventure", "outdoor"]
+    },
+    {
+        name: "Ice Skating ⛸️",
+        traits: {
+            ratings: {
+                "Funny Level": 70,
+                "Chill Level": 70,
+                "Sus Level": 20,
+                "Rizz Level": 50,
+                "Main Character Energy": 60,
+                "Emotional Intelligence": 60,
+            },
+            preferredTraits: ["Graceful", "Patient", "Adventurous"]
+        },
+        tags: ["sports", "fun", "social"]
+    },
+    {
+        name: "Zoo Scavenger Hunt 🦁",
+        traits: {
+            ratings: {
+                "Funny Level": 60,
+                "Chill Level": 70,
+                "Sus Level": 20,
+                "Rizz Level": 30,
+                "Main Character Energy": 50,
+                "Emotional Intelligence": 70,
+            },
+            preferredTraits: ["Curious", "Adventurous", "Observant"]
+        },
+        tags: ["outdoor", "animals", "teamwork"]
+    },
+    {
+        name: "Baking Competition 🍪",
+        traits: {
+            ratings: {
+                "Funny Level": 70,
+                "Chill Level": 80,
+                "Sus Level": 20,
+                "Rizz Level": 40,
+                "Main Character Energy": 50,
+                "Emotional Intelligence": 80,
+            },
+            preferredTraits: ["Creative", "Patient", "Competitive"]
+        },
+        tags: ["cooking", "fun", "teamwork"]
+    },
+    {
+        name: "Sunrise Yoga 🌅",
+        traits: {
+            ratings: {
+                "Funny Level": 40,
+                "Chill Level": 90,
+                "Sus Level": 10,
+                "Rizz Level": 30,
+                "Main Character Energy": 50,
+                "Emotional Intelligence": 90,
+            },
+            preferredTraits: ["Calm", "Mindful", "Healthy"]
+        },
+        tags: ["fitness", "relaxation", "mindfulness"]
     }
 ];
+
 
 
 export default function SuggestionsScreen() {
