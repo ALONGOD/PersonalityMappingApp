@@ -12,6 +12,8 @@ import { GroupProvider } from './store/GroupContext';
 
 const Stack = createStackNavigator();
 
+
+
 export default function App() {
   return (
     <GroupProvider>
